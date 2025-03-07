@@ -11,11 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('kriterias', function (Blueprint $table) {
+        Schema::create('alternatifs', function (Blueprint $table) {
             $table->id();
+            // untuk menyimpan data masyarakat penerima bantuan
+            $table->string('nik')->nullable();
+            $table->string('no_kk')->nullable();
+            $table->string('alamat')->nullable();
             $table->string('nama');
-            $table->string('bobot')->nullable();
-            $table->text('deskripsi')->nullable();
+            $table->string('no_hp')->nullable();   
             $table->timestamps();
         });
     }
@@ -25,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('kriterias');
+        Schema::dropIfExists('alternatifs');
     }
 };

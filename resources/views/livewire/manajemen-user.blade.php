@@ -107,7 +107,7 @@ new class extends Component {
                         </tbody>
                     </table>
                 </div>
-                <div class="d-flex justify-content-center mt-4">
+                <div class="justify-content-between mt-4">
                     {{ $users->links() }}
                 </div>
             </div>

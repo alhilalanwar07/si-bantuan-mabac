@@ -50,11 +50,48 @@ new class extends Component {
                         </span>
                         <h4 class="text-section">Masters</h4>
                     </li>
+                    <!-- masyarakat -->
+                    <li class="nav-item {{ Route::is('masyarakat') ? 'active text-info' : '' }}">
+                        <a class="nav-link" href="{{ route('masyarakat') }}" wire:navigate>
+                            <i class="fas fa-users"></i>
+                            <p>Masyarakat</p>
+                        </a>
+                    </li>
+                    <li class="nav-item {{ Route::is('kriteria') ? 'active text-info' : '' }}">
+                        <a class="nav-link" href="{{ route('kriteria') }}" wire:navigate>
+                            <i class="fas fa-list"></i>
+                            <p>Kriteria</p>
+                        </a>
+                    </li>
                     <li class="nav-section">
                         <span class="sidebar-mini-icon">
                             <i class="fa fa-ellipsis-h"></i>
                         </span>
                         <h4 class="text-section">Proses</h4>
+                    </li>
+                    <li class="nav-item {{ Route::is('perhitungan') ? 'active text-info' : '' }}">
+                        <a class="nav-link" href="{{ route('perhitungan') }}" wire:navigate>
+                            <i class="fas fa-calculator"></i>
+                            <p>Perhitungan</p>
+                        </a>
+                    </li>                    
+                    <li class="nav-section">
+                        <span class="sidebar-mini-icon">
+                            <i class="fa fa-ellipsis-h"></i>
+                        </span>
+                        <h4 class="text-section">Output</h4>
+                    </li>
+                    <li class="nav-item {{ Route::is('hasil') ? 'active text-info' : '' }}">
+                        <a class="nav-link" href="{{ route('hasil') }}" wire:navigate>
+                            <i class="fas fa-chart-bar"></i>
+                            <p>Hasil</p>
+                        </a>
+                    </li>
+                    <li class="nav-section">
+                        <span class="sidebar-mini-icon">
+                            <i class="fa fa-ellipsis-h"></i>
+                        </span>
+                        <h4 class="text-section">Settings</h4>
                     </li>
                     @if(auth()->user()->role == 'admin')
                     <li class="nav-item {{ Route::is('admin.manajemen-user') ? 'active text-info' : '' }}">
@@ -70,8 +107,6 @@ new class extends Component {
                             <p>Profil</p>
                         </a>
                     </li>
-
-
                     <br>
                     <div class="px-4">
                         <li class="nav-item" style="padding: 0px !important;">

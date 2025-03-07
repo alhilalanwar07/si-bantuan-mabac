@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('kriteria_id')->constrained('kriterias')->onDelete('cascade');
             $table->string('nama');
             $table->string('bobot')->nullable();
-            $table->text('deskripsi');
+            $table->text('deskripsi')->nullable();
             $table->timestamps();
         });
     }
