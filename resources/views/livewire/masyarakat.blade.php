@@ -2,6 +2,8 @@
 
 use Livewire\Volt\Component;
 use App\Models\Alternatif;
+use App\Models\Kriteriaalternatif;
+use Illuminate\Support\Facades\DB;
 use Livewire\WithPagination;
 
 new class extends Component {
@@ -9,43 +11,90 @@ new class extends Component {
     protected $paginationTheme = 'bootstrap';
     public $paginate = 10;
 
+    public $nik, $no_kk, $alamat, $nama, $no_hp, $alternatif_id;
+    public $selectedSubkriterias = [];
+
+    public function mount()
+    {
+        // Initialize the array with empty values
+        foreach (\App\Models\Kriteria::all() as $kriteria) {
+            $this->selectedSubkriterias[$kriteria->id] = '';
+        }
+    }
+
     public function with(): array
     {
         return [
-            'alternatifs' => Alternatif::paginate($this->paginate)
+            'alternatifs' => Alternatif::paginate($this->paginate),
+            'kriterias' => \App\Models\Kriteria::with('subkriteria')->get(),
         ];
     }
 
-    // create alternatif
-    public $nik, $no_kk, $alamat, $nama, $no_hp, $alternatif_id;
+    // 
+
+    protected $rules = [
+        'nik' => 'required',
+        'no_kk' => 'required',
+        'alamat' => 'required',
+        'nama' => 'required',
+        'no_hp' => 'required'
+    ];
+
+    protected $messages = [
+        'nik.required' => 'NIK tidak boleh kosong',
+        'no_kk.required' => 'No KK tidak boleh kosong',
+        'alamat.required' => 'Alamat tidak boleh kosong',
+        'nama.required' => 'Nama tidak boleh kosong',
+        'no_hp.required' => 'No HP tidak boleh kosong'
+    ];
 
     public function store()
     {
-        $this->validate([
-            'nik' => 'required',
-            'no_kk' => 'required',
-            'alamat' => 'required',
-            'nama' => 'required',
-            'no_hp' => 'required'
-        ], [
-            'nik.required' => 'NIK tidak boleh kosong',
-            'no_kk.required' => 'No KK tidak boleh kosong',
-            'alamat.required' => 'Alamat tidak boleh kosong',
-            'nama.required' => 'Nama tidak boleh kosong',
-            'no_hp.required' => 'No HP tidak boleh kosong'
-        ]);
+        $this->validate();
+
+        // Validate subkriteria selections
+        $validationRules = [];
+        $validationMessages = [];
+
+        foreach ($this->selectedSubkriterias as $kriteriaId => $_) {
+            $kriteria = \App\Models\Kriteria::find($kriteriaId);
+            $validationRules["selectedSubkriterias.$kriteriaId"] = 'required';
+            $validationMessages["selectedSubkriterias.$kriteriaId.required"] = "Pilihan untuk {$kriteria->nama} harus diisi";
+        }
+
+        $this->validate($validationRules, $validationMessages);
 
         try {
-            Alternatif::create([
-                'nik' => $this->nik,
-                'no_kk' => $this->no_kk,
-                'alamat' => $this->alamat,
-                'nama' => $this->nama,
-                'no_hp' => $this->no_hp
-            ]);
+            DB::beginTransaction();
+            try {
+                $alternatif = Alternatif::create([
+                    'nik' => $this->nik,
+                    'no_kk' => $this->no_kk,
+                    'alamat' => $this->alamat,
+                    'nama' => $this->nama,
+                    'no_hp' => $this->no_hp
+                ]);
 
-            $this->reset();
-            $this->dispatch('updateAlertToast');
+                // Save subkriteria selections
+                foreach ($this->selectedSubkriterias as $kriteriaId => $subkriteriaId) {
+                    $subkriteria = \App\Models\Subkriteria::find($subkriteriaId);
+
+                    Kriteriaalternatif::create([
+                        'alternatif_id' => $alternatif->id,
+                        'subkriteria_id' => $subkriteriaId,
+                        'nilai' => $subkriteria->bobot // Assuming bobot is the value
+                    ]);
+                }
+
+                DB::commit();
+            } catch (\Exception $e) {
+                DB::rollBack();
+                throw $e;
+            }
+
+            $this->reset(['nik', 'no_kk', 'alamat', 'nama', 'no_hp']);
+            $this->selectedSubkriterias = array_fill_keys(array_keys($this->selectedSubkriterias), '');
+            $this->dispatch('tambahAlertToast');
         } catch (\Exception $e) {
             $this->dispatch('errorAlertToast', $e->getMessage());
         }
@@ -62,8 +111,8 @@ new class extends Component {
         }
 
         try {
-            $alternatif->delete();    
-            $this->dispatch('updateAlertToast');
+            $alternatif->delete();
+            $this->dispatch('deleteAlertToast');
         } catch (\Exception $e) {
             $this->dispatch('errorAlertToast', $e->getMessage());
         }
@@ -108,7 +157,7 @@ new class extends Component {
                 <div class="card-head-row">
                     <div class="card-title">Masyarakat</div>
                     <div class="card-tools">
-                        <a href="#" class="btn btn-info btn-sm me-2" data-bs-toggle="modal" data-bs-target="#addAlternatif">
+                        <a href="#" class="btn btn-info btn-sm me-2" data-bs-toggle="modal" data-bs-target="#modalTambah">
                             <span class="btn-label">
                                 <i class="fa fa-plus"></i>
                             </span>
@@ -142,7 +191,7 @@ new class extends Component {
                                 <td>{{ $alternatif->nama }}</td>
                                 <td>{{ $alternatif->no_hp }}</td>
                                 <td>
-                                    <a href="#" class="btn btn-sm btn-primary m-1" data-bs-toggle="modal" data-bs-target="#editAlternatif" wire:click="edit({{ $alternatif->id }})">Edit</a>
+                                    <a href="#" class="btn btn-sm btn-primary m-1" data-bs-toggle="modal" data-bs-target="#modalEdit" wire:click="edit({{ $alternatif->id }})">Edit</a>
                                     <a href="#" class="btn btn-sm btn-danger m-1" wire:click="delete({{ $alternatif->id }})">Delete</a>
                                 </td>
                             </tr>
@@ -156,11 +205,11 @@ new class extends Component {
             </div>
         </div>
     </div>
-    <div wire:ignore class="modal fade" id="addAlternatif" tabindex="-1" aria-labelledby="addAlternatifLabel" aria-hidden="true">
+    <div wire:ignore class="modal fade" id="modalTambah" tabindex="-1" aria-labelledby="modalTambahLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="addAlternatifLabel">Tambah Alternatif</h5>
+                    <h5 class="modal-title" id="modalTambahLabel">Tambah Alternatif</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body p-4">
@@ -191,6 +240,20 @@ new class extends Component {
                             <input type="text" class="form-control @error('no_hp') is-invalid @enderror" id="no_hp" placeholder="No HP" wire:model="no_hp">
                             @error('no_hp') <span class="text-danger">{{ $message }}</span> @enderror
                         </div>
+                        <!-- menampilkan semua kriteria untuk memilih subkriteria -->
+                        @foreach($kriterias as $kriteria)
+                        <div class="mb-3">
+                            <label class="form-label">{{ $kriteria->nama }}</label>
+                            <select class="form-select @error('selectedSubkriterias.'.$kriteria->id) is-invalid @enderror" wire:model="selectedSubkriterias.{{ $kriteria->id }}">
+                                <option value="">--Pilih--</option>
+                                @foreach($kriteria->subkriteria as $subkriteria)
+                                <option value="{{ $subkriteria->id }}">{{ $subkriteria->nama }}</option>
+                                @endforeach
+                            </select>
+                            @error('selectedSubkriterias.'.$kriteria->id) <span class="text-danger">{{ $message }}</span> @enderror
+                        </div>
+                        @endforeach
+
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                             <button type="submit" class="btn btn-primary">Simpan</button>
@@ -200,11 +263,11 @@ new class extends Component {
             </div>
         </div>
     </div>
-    <div wire:ignore class="modal fade" id="editAlternatif" tabindex="-1" aria-labelledby="editAlternatifLabel" aria-hidden="true">
+    <div wire:ignore class="modal fade" id="modalEdit" tabindex="-1" aria-labelledby="modalEditLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="editAlternatifLabel">Edit Alternatif</h5>
+                    <h5 class="modal-title" id="modalEditLabel">Edit Alternatif</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body p-4">

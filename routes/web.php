@@ -18,4 +18,5 @@ Route::middleware('auth')->group(function () {
     Route::view('kriteria', 'kriteria')->name('kriteria');
     Route::view('perhitungan', 'perhitungan')->name('perhitungan');
     Route::view('hasil', 'hasil')->name('hasil');
+    Route::view('periode', 'periode')->name('periode');
 });

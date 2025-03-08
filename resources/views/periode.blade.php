@@ -1,5 +1,5 @@
 <x-admin-layout>
-    @section('title', 'Data Masyarakat')
+    @section('title', 'Data Periode')
     <div class="page-inner">
         <div class="page-header">
             <ul class="breadcrumbs mb-3">
@@ -12,12 +12,12 @@
                     <i class="icon-arrow-right"></i>
                 </li>
                 <li class="nav-item">
-                    <a href="#">Data Masyarakat</a>
+                    <a href="#">Data Periode</a>
                 </li>
             </ul>
         </div>
         <div class="row">
-            <livewire:masyarakat />
+            <livewire:periode />
         </div>
     </div>
 </x-admin-layout>

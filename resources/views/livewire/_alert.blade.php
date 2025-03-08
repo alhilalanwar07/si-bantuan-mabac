@@ -27,13 +27,13 @@
                             , closeModal: true
                         }
                     }
-                    , timer: 2000
+                    , timer: 1500
                     , timerProgressBar: true
                 });
                 const modal = bootstrap.Modal.getInstance(document.getElementById('modalEdit'));
                 modal.hide();
 
-                setTimeout(function() { window.location.reload(); }, 2000);
+                setTimeout(function() { window.location.reload(); }, 1000);
 
             });
 
@@ -52,13 +52,13 @@
                             , closeModal: true
                         }
                     }
-                    , timer: 2000
+                    , timer: 1500
                     , timerProgressBar: true
                 });
                 const modal = bootstrap.Modal.getInstance(document.getElementById('modalTambah'));
                 modal.hide();
 
-                setTimeout(function() { window.location.reload(); }, 2000);
+                setTimeout(function() { window.location.reload(); }, 1000);
 
             });
 
@@ -77,10 +77,10 @@
                             , closeModal: true
                         }
                     }
-                    , timer: 2000
+                    , timer: 1500
                     , timerProgressBar: true
                 });
-                setTimeout(function() { window.location.reload(); }, 2000);
+                setTimeout(function() { window.location.reload(); }, 1000);
 
             });
 

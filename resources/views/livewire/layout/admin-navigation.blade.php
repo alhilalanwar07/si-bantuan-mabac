@@ -50,15 +50,20 @@ new class extends Component {
                         </span>
                         <h4 class="text-section">Masters</h4>
                     </li>
-                    <!-- masyarakat -->
+                    <li class="nav-item {{ Route::is('periode') ? 'active text-info' : '' }}">
+                        <a class="nav-link" href="{{ route('periode') }}" >
+                            <i class="fas fa-calendar"></i>
+                            <p>Periode</p>
+                        </a>
+                    </li>
                     <li class="nav-item {{ Route::is('masyarakat') ? 'active text-info' : '' }}">
-                        <a class="nav-link" href="{{ route('masyarakat') }}" wire:navigate>
+                        <a class="nav-link" href="{{ route('masyarakat') }}" >
                             <i class="fas fa-users"></i>
                             <p>Masyarakat</p>
                         </a>
                     </li>
                     <li class="nav-item {{ Route::is('kriteria') ? 'active text-info' : '' }}">
-                        <a class="nav-link" href="{{ route('kriteria') }}" wire:navigate>
+                        <a class="nav-link" href="{{ route('kriteria') }}" >
                             <i class="fas fa-list"></i>
                             <p>Kriteria</p>
                         </a>
@@ -70,7 +75,7 @@ new class extends Component {
                         <h4 class="text-section">Proses</h4>
                     </li>
                     <li class="nav-item {{ Route::is('perhitungan') ? 'active text-info' : '' }}">
-                        <a class="nav-link" href="{{ route('perhitungan') }}" wire:navigate>
+                        <a class="nav-link" href="{{ route('perhitungan') }}" >
                             <i class="fas fa-calculator"></i>
                             <p>Perhitungan</p>
                         </a>
@@ -82,7 +87,7 @@ new class extends Component {
                         <h4 class="text-section">Output</h4>
                     </li>
                     <li class="nav-item {{ Route::is('hasil') ? 'active text-info' : '' }}">
-                        <a class="nav-link" href="{{ route('hasil') }}" wire:navigate>
+                        <a class="nav-link" href="{{ route('hasil') }}" >
                             <i class="fas fa-chart-bar"></i>
                             <p>Hasil</p>
                         </a>
@@ -95,14 +100,14 @@ new class extends Component {
                     </li>
                     @if(auth()->user()->role == 'admin')
                     <li class="nav-item {{ Route::is('admin.manajemen-user') ? 'active text-info' : '' }}">
-                        <a class="nav-link" href="{{ route('admin.manajemen-user') }}" wire:navigate>
+                        <a class="nav-link" href="{{ route('admin.manajemen-user') }}" >
                             <i class="fas fa-users"></i>
                             <p>Manajemen User</p>
                         </a>
                     </li>
                     @endif
                     <li class="nav-item {{ Route::is('profil') ? 'active text-info' : '' }}">
-                        <a class="nav-link" href="{{ route('profil') }}" wire:navigate>
+                        <a class="nav-link" href="{{ route('profil') }}" >
                             <i class="fas fa-user"></i>
                             <p>Profil</p>
                         </a>
