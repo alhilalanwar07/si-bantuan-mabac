@@ -50,24 +50,29 @@ new class extends Component {
                         </span>
                         <h4 class="text-section">Masters</h4>
                     </li>
+                    @if (auth()->user()->role == 'admin')                        
                     <li class="nav-item {{ Route::is('periode') ? 'active text-info' : '' }}">
                         <a class="nav-link" href="{{ route('periode') }}" >
                             <i class="fas fa-calendar"></i>
                             <p>Periode</p>
                         </a>
                     </li>
+                    @endif
+
                     <li class="nav-item {{ Route::is('masyarakat') ? 'active text-info' : '' }}">
                         <a class="nav-link" href="{{ route('masyarakat') }}" >
                             <i class="fas fa-users"></i>
                             <p>Masyarakat</p>
                         </a>
                     </li>
+                    @if (auth()->user()->role == 'admin')
                     <li class="nav-item {{ Route::is('kriteria') ? 'active text-info' : '' }}">
                         <a class="nav-link" href="{{ route('kriteria') }}" >
                             <i class="fas fa-list"></i>
                             <p>Kriteria</p>
                         </a>
                     </li>
+                    @endif
                     <li class="nav-section">
                         <span class="sidebar-mini-icon">
                             <i class="fa fa-ellipsis-h"></i>

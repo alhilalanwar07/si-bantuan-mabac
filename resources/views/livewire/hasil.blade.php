@@ -146,7 +146,9 @@ new class extends Component {
                                 <th>Nilai</th>
                                 <th>Status</th>
                                 <th>Ranking</th>
+                                @if(auth()->user()->role == 'admin')
                                 <th width="15%">Action</th>
+                                @endif
                             </tr>
                         </thead>
                         <tbody>
@@ -158,12 +160,15 @@ new class extends Component {
                                 <td>{{ $hasil->nilai }}</td>
                                 <td>{{ $hasil->status }}</td>
                                 <td>{{ $hasils->firstItem() + $loop->index }}</td>
+                                <!-- admin -->
+                                @if(auth()->user()->role == 'admin')
                                 <td>
                                     <!-- update status jadi sebagai penerima bantuan -->
                                     <button wire:click="terimaBantuan({{ $hasil->id }})" class="btn btn-warning btn-sm">
                                     <i class="fas fa-check"></i>    
                                     Terima Bantuan</button>
                                 </td>
+                                @endif
                             </tr>
                             @endforeach
                         </tbody>

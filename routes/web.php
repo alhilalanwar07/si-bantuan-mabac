@@ -11,11 +11,14 @@ Route::redirect('/', '/login');
 
 Route::middleware('auth')->group(function () {
     Route::view('dashboard', 'dashboard')->name('home');
-    Route::view('manajemen-user', 'manajemen-user')->name('admin.manajemen-user');
     Route::view('profil', 'profil')->name('profil');
     Route::view('masyarakat', 'masyarakat')->name('masyarakat');
-    Route::view('kriteria', 'kriteria')->name('kriteria');
     Route::view('perhitungan', 'perhitungan')->name('perhitungan');
     Route::view('hasil', 'hasil')->name('hasil');
+});
+
+Route::middleware('admin')->group(function () {
     Route::view('periode', 'periode')->name('periode');
+    Route::view('kriteria', 'kriteria')->name('kriteria');
+    Route::view('manajemen-user', 'manajemen-user')->name('admin.manajemen-user');
 });
