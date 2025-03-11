@@ -193,12 +193,11 @@ new class extends Component {
                     <table class="table table-hover table-borderless">
                         <thead>
                             <tr>
-                                <th>#</th>
-                                <th>Alternatif</th>
+                                <th width="10%">#</th>
+                                <th>NIK/KK</th>
+                                <th>Nama/No HP</th>
                                 <th>Nilai</th>
                                 <th>Status</th>
-                                <th>Ranking</th>
-                                <th width="15%">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -206,12 +205,16 @@ new class extends Component {
                             @foreach($hasil_penerima as $hasil)
                             <tr>
                                 <td>{{ $no++ }}</td>
-                                <td>{{ $hasil->alternatif->nama }}</td>
+                                <td>{{ $hasil->alternatif->nik }} 
+                                    <br>
+                                    {{ $hasil->alternatif->no_kk }}
+                                </td>
+                                <td>{{ $hasil->alternatif->nama }}
+                                    <br>
+                                    {{ $hasil->alternatif->no_hp }}
+                                </td>
                                 <td>{{ $hasil->nilai }}</td>
                                 <td>{{ $hasil->status }}</td>
-                                <td>{{ $hasils->firstItem() + $loop->index }}</td>
-                                <td>
-                                </td>
                             </tr>
                             @endforeach
                         </tbody>
@@ -222,7 +225,5 @@ new class extends Component {
                 </div>
             </div>
         </div>
-        <!-- yang keterangan sudah terima -->
-        
     </div>
 </div>

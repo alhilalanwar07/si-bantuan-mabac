@@ -18,8 +18,8 @@ new class extends Component {
         <div class="sidebar-logo">
             <!-- Logo Header -->
             <div class="logo-header" data-background-color="dark">
-                <a href="#" class="logo">
-                    <img src="{{ url('/') }}/assets/img/logo/koltim-2.png" alt="kolaka timur" height="30" />
+                <a href="#" class="logo text-white" >
+                    SiBantara
                 </a>
                 <div class="nav-toggle">
                     <button class="btn btn-toggle toggle-sidebar">

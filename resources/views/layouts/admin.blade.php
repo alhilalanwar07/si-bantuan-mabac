@@ -6,7 +6,7 @@
         @yield('title', config('app.name'))
     </title>
     <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport" />
-    <link rel="icon" href="{{ url('/') }}/assets/img/logo/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="{{ url('/') }}/favicon.ico" type="image/x-icon" />
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
@@ -30,7 +30,7 @@
                     <!-- Logo Header -->
                     <div class="logo-header" data-background-color="white">
                         <a href="#" class="logo">
-                            <img src="{{ url('/') }}/assets/img/logo/logo_light.svg" alt="navbar brand" class="navbar-brand" height="20" />
+                            <img src="{{ url('/') }}/assets/img/favicon/web-app-manifest-192x192.png" alt="navbar brand" class="navbar-brand" height="20" />
                         </a>
                         <div class="nav-toggle">
                             <button class="btn btn-toggle toggle-sidebar">
@@ -58,8 +58,8 @@
             <footer class="footer">
                 <div class="container-fluid d-flex justify-content-between">
                     <div class="copyright">
-                        2024, made with <i class="fa fa-heart heart text-danger"></i> by
-                        <a href="#">KOMINFO</a>
+                        2025, made with <i class="fa fa-heart heart text-danger"></i> by
+                        <a href="#">ADI</a>
                     </div>
                 </div>
             </footer>

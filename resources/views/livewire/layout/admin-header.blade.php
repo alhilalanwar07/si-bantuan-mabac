@@ -17,14 +17,9 @@ new class extends Component {
     <nav class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bottom">
         <div class="container-fluid">
             <nav class="navbar navbar-header-left navbar-expand-lg navbar-form nav-search p-0 d-none d-lg-flex">
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <button type="submit" class="btn btn-search pe-1">
-                            <i class="fa fa-search search-icon"></i>
-                        </button>
-                    </div>
-                    <input type="text" placeholder="Search ..." class="form-control" />
-                </div>
+                <h4 class="">
+                    Sistem Informasi Bantuan Desa Ranoteta
+                </h4>
             </nav>
 
             <ul class="navbar-nav topbar-nav ms-md-auto align-items-center">
@@ -42,72 +37,13 @@ new class extends Component {
                 </li>
                 <li class="nav-item topbar-icon dropdown hidden-caret">
                     <a class="nav-link dropdown-toggle" href="#" id="notifDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fa fa-bell"></i>
-                        <span class="notification">4</span>
                     </a>
-                    <ul class="dropdown-menu notif-box animated fadeIn" aria-labelledby="notifDropdown">
-                        <li>
-                            <div class="dropdown-title">
-                                You have 4 new notification
-                            </div>
-                        </li>
-                        <li>
-                            <div class="notif-scroll scrollbar-outer">
-                                <div class="notif-center">
-                                    <a href="#">
-                                        <div class="notif-icon notif-primary">
-                                            <i class="fa fa-user-plus"></i>
-                                        </div>
-                                        <div class="notif-content">
-                                            <span class="block"> New user registered </span>
-                                            <span class="time">5 minutes ago</span>
-                                        </div>
-                                    </a>
-                                    <a href="#">
-                                        <div class="notif-icon notif-success">
-                                            <i class="fa fa-comment"></i>
-                                        </div>
-                                        <div class="notif-content">
-                                            <span class="block">
-                                                Rahmad commented on Admin
-                                            </span>
-                                            <span class="time">12 minutes ago</span>
-                                        </div>
-                                    </a>
-                                    <a href="#">
-                                        <div class="notif-img">
-                                            <img src="{{ url('/') }}/assets/img/profile2.jpg" alt="Img Profile" />
-                                        </div>
-                                        <div class="notif-content">
-                                            <span class="block">
-                                                Reza send messages to you
-                                            </span>
-                                            <span class="time">12 minutes ago</span>
-                                        </div>
-                                    </a>
-                                    <a href="#">
-                                        <div class="notif-icon notif-danger">
-                                            <i class="fa fa-heart"></i>
-                                        </div>
-                                        <div class="notif-content">
-                                            <span class="block"> Farrah liked Admin </span>
-                                            <span class="time">17 minutes ago</span>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <a class="see-all" href="javascript:void(0);">See all notifications<i class="fa fa-angle-right"></i>
-                            </a>
-                        </li>
-                    </ul>
                 </li>
 
                 <li class="nav-item topbar-user dropdown hidden-caret">
                     <a class="dropdown-toggle profile-pic" data-bs-toggle="dropdown" href="#" aria-expanded="false">
                         <div class="avatar-sm">
-                            <img src="{{ url('/') }}/assets/img/logo/favicon-96x96.png" alt="kolaka timur" class="avatar-img rounded-circle" />
+                            <img src="{{ url('/') }}/assets/img/favicon/web-app-manifest-192x192.png" alt="Desa Ranoteta" class="avatar-img rounded-circle" />
                         </div>
                         <span class="profile-username">
                             <span class="op-7">Hi,</span>
@@ -121,7 +57,7 @@ new class extends Component {
                             <li>
                                 <div class="user-box">
                                     <div class="avatar-lg">
-                                        <img src="{{ url('/') }}/assets/img/logo/favicon-96x96.png" alt="kolaka timur" class="avatar-img rounded" />
+                                        <img src="{{ url('/') }}/assets/img/favicon/web-app-manifest-192x192.png" alt="Desa Ranoteta" class="avatar-img rounded" />
                                     </div>
                                     <div class="u-text">
                                         <h4>
@@ -130,7 +66,7 @@ new class extends Component {
                                         <p class="text-muted">
                                             {{ auth()->check() ? auth()->user()->email : ' ' }}
                                         </p>
-                                        <a href="/" class="btn btn-xs btn-secondary btn-sm">Lihat Profile</a>
+                                        <a href="/profil" class="btn btn-xs btn-secondary btn-sm">Lihat Profile</a>
                                     </div>
                                 </div>
                             </li>
