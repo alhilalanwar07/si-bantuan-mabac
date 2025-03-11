@@ -17,7 +17,7 @@ new class extends Component {
     }
 
     // create periode
-    public $nama, $tahun, $periode_id;
+    public $nama, $tahun, $periode_id, $status;
 
     public function store()
     {
@@ -30,6 +30,9 @@ new class extends Component {
         ]);
 
         try {
+            // Set all other periodes to nonaktif
+            Periode::where('status', 'aktif')->update(['status' => 'nonaktif']);
+            
             Periode::create([
                 'nama' => $this->nama,
                 'tahun' => $this->tahun
@@ -83,6 +86,26 @@ new class extends Component {
             $this->dispatch('errorAlertToast', $e->getMessage());
         }
     }
+
+    public function updateStatus($id)
+    {
+        // hanya 1 yang boleh aktif
+        // Set all other periodes to nonaktif
+        Periode::where('status', 'aktif')->update(['status' => 'nonaktif']);
+
+        $periode = Periode::find($id);
+        $status = $periode->status == 'aktif' ? 'nonaktif' : 'aktif';
+
+        try {
+            $periode->update([
+            'status' => $status
+            ]);
+
+            $this->dispatch('updateAlertToast');
+        } catch (\Exception $e) {
+            $this->dispatch('errorAlertToast', $e->getMessage());
+        }
+    }
 }; ?>
 
 <div>
@@ -109,6 +132,7 @@ new class extends Component {
                                 <th>#</th>
                                 <th>Nama</th>
                                 <th>Tahun</th>
+                                <th>Status</th>
                                 <th width="15%">Action</th>
                             </tr>
                         </thead>
@@ -120,8 +144,14 @@ new class extends Component {
                                 <td>{{ $periode->nama }}</td>
                                 <td>{{ $periode->tahun }}</td>
                                 <td>
+                                    <span class="badge badge-{{ $periode->status == 'aktif' ? 'success' : 'danger' }}">{{ $periode->status }}</span>
+                                </td>
+                                <td>
                                     <a href="#" class="btn btn-sm btn-primary m-1" data-bs-toggle="modal" data-bs-target="#modalEdit" wire:click="edit({{ $periode->id }})">Edit</a>
                                     <a href="#" class="btn btn-sm btn-danger m-1" wire:click="delete({{ $periode->id }})">Delete</a>
+                                    <a href="#" class="btn btn-sm btn-{{ $periode->status == 'nonaktif' ? 'success' : 'danger' }} m-1" wire:click="updateStatus({{ $periode->id }})">
+                                        {{ $periode->status == 'nonaktif' ? 'Aktifkan' : 'Nonaktifkan' }}
+                                    </a>
                                 </td>
                             </tr>
                             @endforeach

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Periode extends Model
 {
     protected $table = 'periodes';
-    protected $fillable = ['nama', 'tahun'];
+    protected $fillable = ['nama', 'tahun', 'status'];
 
     public function hasil()
     {

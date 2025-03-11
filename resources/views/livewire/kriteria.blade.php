@@ -8,7 +8,7 @@ use Livewire\WithPagination;
 new class extends Component {
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
-    public $nama_kriteria, $bobot_kriteria, $deskripsi_kriteria, $kriteria_id;
+    public $nama_kriteria, $bobot_kriteria, $deskripsi_kriteria, $kriteria_id, $tipe_kriteria;
     public $selectedKriteriaId;
     public $isSubkriteriaMode = false;
     public $paginate = 10;
@@ -28,18 +28,21 @@ new class extends Component {
         $this->validate([
             'nama_kriteria' => 'required',
             'bobot_kriteria' => 'required',
-            'deskripsi_kriteria' => 'required'
+            'deskripsi_kriteria' => 'required',
+            'tipe_kriteria' => 'required'
         ], [
             'nama_kriteria.required' => 'Nama tidak boleh kosong',
             'bobot_kriteria.required' => 'Bobot tidak boleh kosong',
-            'deskripsi_kriteria.required' => 'Deskripsi tidak boleh kosong'
+            'deskripsi_kriteria.required' => 'Deskripsi tidak boleh kosong',
+            'tipe_kriteria.required' => 'Tipe tidak boleh kosong'
         ]);
 
         try {
             Kriteria::create([
                 'nama' => $this->nama_kriteria,
                 'bobot' => $this->bobot_kriteria,
-                'deskripsi' => $this->deskripsi_kriteria
+                'deskripsi' => $this->deskripsi_kriteria,
+                'tipe' => $this->tipe_kriteria
             ]);
 
             $this->reset();
@@ -56,6 +59,7 @@ new class extends Component {
         $this->nama_kriteria = $kriteria->nama;
         $this->bobot_kriteria = $kriteria->bobot;
         $this->deskripsi_kriteria = $kriteria->deskripsi;
+        $this->tipe_kriteria = $kriteria->tipe;
     }   
 
     public function updateKriteria()
@@ -63,11 +67,13 @@ new class extends Component {
         $this->validate([
             'nama_kriteria' => 'required',
             'bobot_kriteria' => 'required',
-            'deskripsi_kriteria' => 'required'
+            'deskripsi_kriteria' => 'required',
+            'tipe_kriteria' => 'required'
         ], [
             'nama_kriteria.required' => 'Nama tidak boleh kosong',
             'bobot_kriteria.required' => 'Bobot tidak boleh kosong',
-            'deskripsi_kriteria.required' => 'Deskripsi tidak boleh kosong'
+            'deskripsi_kriteria.required' => 'Deskripsi tidak boleh kosong',
+            'tipe_kriteria.required' => 'Tipe tidak boleh kosong'
         ]);
 
         try {
@@ -75,7 +81,8 @@ new class extends Component {
             $kriteria->update([
                 'nama' => $this->nama_kriteria,
                 'bobot' => $this->bobot_kriteria,
-                'deskripsi' => $this->deskripsi_kriteria
+                'deskripsi' => $this->deskripsi_kriteria,
+                'tipe' => $this->tipe_kriteria
             ]);
 
             $this->reset();
@@ -225,6 +232,7 @@ new class extends Component {
                             <tr>
                                 <th>#</th>
                                 <th>Nama Kriteria</th>
+                                <th>Tipe</th>
                                 <th>Bobot</th>
                                 <th>Deskripsi</th>
                                 <th width="20%">Action</th>
@@ -236,6 +244,7 @@ new class extends Component {
                             <tr>
                                 <td>{{ $no++ }}</td>
                                 <td>{{ $kriteria->nama }}</td>
+                                <td>{{ $kriteria->tipe }}</td>
                                 <td>{{ $kriteria->bobot }}</td>
                                 <td>{{ $kriteria->deskripsi }}</td>
                                 <td>
