@@ -171,7 +171,11 @@ new class extends Component {
                                 <td>{{ $no++ }}</td>
                                 <td>{{ $hasil->alternatif->nama }}</td>
                                 <td>{{ $hasil->nilai }}</td>
-                                <td>{{ $hasil->status }}</td>
+                                <td>
+                                    <span class="badge badge-{{ $hasil->status == 'penerima' ? 'success' : 'warning' }}">
+                                        {{ ucwords($hasil->status) }}
+                                    </span>
+                                </td>
                                 <td>{{ $hasils->firstItem() + $loop->index }}</td>
                                 <!-- admin -->
                                 @if(auth()->user()->role == 'admin')
