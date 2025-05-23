@@ -118,6 +118,19 @@ new class extends Component {
             $this->dispatch('errorAlertToast', $e->getMessage());
         }
     }
+
+    public function batalkan($id)
+    {
+        try {
+            Hasil::find($id)->update([
+                'status' => 'belum'
+            ]);
+
+            $this->dispatch('updateAlertToast');
+        } catch (\Exception $e) {
+            $this->dispatch('errorAlertToast', $e->getMessage());
+        }
+    }
 }; ?>
 
 <div>
@@ -203,6 +216,7 @@ new class extends Component {
                                 <th>Nama/No HP</th>
                                 <th>Nilai</th>
                                 <th>Status</th>
+                                <th width="15%">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -220,6 +234,12 @@ new class extends Component {
                                 </td>
                                 <td>{{ $hasil->nilai }}</td>
                                 <td>{{ $hasil->status }}</td>
+                                <td>
+                                    <!-- delete -->
+                                    <button wire:click="batalkan({{ $hasil->id }})" class="btn btn-danger btn-sm">
+                                        <i class="fas fa-trash"></i>
+                                        Batalkan
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>
