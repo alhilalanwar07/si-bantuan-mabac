@@ -24,7 +24,7 @@ new class extends Component {
                     <div class="d-block mb-3 mb-sm-0">
                         <div class="fs-5 fw-normal mb-2">Hi, {{auth()->user()->name ?? 'User'}}</div>
                         <h2 class="fs-3 fw-extrabold">
-                            Selamat datang di {{ config('app.name') }}
+                            Selamat datang di Sistem Pendukung Keputusan Desa Ranoteta
                         </h2>
                         <div class="small mt-2">
                             <span class="fw-normal me-2">
@@ -129,7 +129,7 @@ new class extends Component {
                         <div class="col-12 col-xl-7 px-xl-4">
                             <blockquote class="blockquote text-white mb-0 text-justify fs-3">
                                 <p class="fs-4 font-italic fw-italic text-justify" style="text-align: justify;">
-                                    "Selamat datang di Sistem Informasi Bantuan Desa Ranoteta. Kami hadir untuk memudahkan akses informasi dan layanan bantuan bagi warga. Dengan sistem ini, kami berkomitmen memberikan pelayanan terbaik demi kesejahteraan bersama. Terima kasih telah berkunjung, semoga Anda mendapatkan manfaat dari layanan kami."
+                                    "Selamat datang di Sistem Pendukung Keputusan Bantuan Desa Ranoteta. Kami hadir untuk memudahkan akses informasi dan layanan bantuan bagi warga. Dengan sistem ini, kami berkomitmen memberikan pelayanan terbaik demi kesejahteraan bersama. Terima kasih telah berkunjung, semoga Anda mendapatkan manfaat dari layanan kami."
                                 </p>
                                 <footer class="blockquote-footer mt-2" style="color: white;">
                                     <cite title="Kepala Desa">Juliadi, S.Pd</cite>
