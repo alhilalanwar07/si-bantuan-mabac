@@ -15,6 +15,7 @@ new class extends Component {
     public $search;
     public $subkriteria_id, $nama, $bobot, $deskripsi;
     public $subkriterias;
+    public $tipe;
 
     public function with(): array
     {
@@ -125,11 +126,11 @@ new class extends Component {
         $this->validate([
             'nama' => 'required',
             'bobot' => 'required',
-            'deskripsi' => 'required'
+            'deskripsi' => 'required',
         ], [
             'nama.required' => 'Nama tidak boleh kosong',
             'bobot.required' => 'Bobot tidak boleh kosong',
-            'deskripsi.required' => 'Deskripsi tidak boleh kosong'
+            'deskripsi.required' => 'Deskripsi tidak boleh kosong',
         ]);
 
         try {
@@ -137,7 +138,7 @@ new class extends Component {
                 'kriteria_id' => $this->selectedKriteriaId,
                 'nama' => $this->nama,
                 'bobot' => $this->bobot,
-                'deskripsi' => $this->deskripsi
+                'deskripsi' => $this->deskripsi,
             ]);
 
             $this->reset();
@@ -161,7 +162,7 @@ new class extends Component {
         $this->validate([
             'nama' => 'required',
             'bobot' => 'required',
-            'deskripsi' => 'required'
+            'deskripsi' => 'required',
         ], [
             'nama.required' => 'Nama tidak boleh kosong',
             'bobot.required' => 'Bobot tidak boleh kosong',
@@ -345,6 +346,15 @@ new class extends Component {
                             <input type="text" class="form-control @error('deskripsi_kriteria') is-invalid @enderror" id="deskripsi_kriteria" placeholder="Deskripsi Kriteria" wire:model="deskripsi_kriteria">
                             @error('deskripsi_kriteria') <span class="text-danger">{{ $message }}</span> @enderror
                         </div>
+                        <div class="mb-3">
+                            <label for="tipe_kriteria" class="form-label">Tipe Kriteria</label>
+                            <select class="form-select @error('tipe_kriteria') is-invalid @enderror" id="tipe_kriteria" wire:model="tipe_kriteria">
+                                <option value="">Pilih Tipe Kriteria</option>
+                                <option value="benefit">Benefit</option>
+                                <option value="cost">Cost</option>
+                            </select>
+                            @error('tipe_kriteria') <span class="text-danger">{{ $message }}</span> @enderror
+                        </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                             <button type="submit" class="btn btn-primary">Simpan</button>
@@ -374,6 +384,15 @@ new class extends Component {
                             <label for="bobot_kriteria" class="form-label">Bobot Kriteria</label>
                             <input type="text" class="form-control @error('bobot_kriteria') is-invalid @enderror" id="bobot_kriteria" placeholder="Bobot Kriteria" wire:model="bobot_kriteria">
                             @error('bobot_kriteria') <span class="text-danger">{{ $message }}</span> @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label for="tipe_kriteria" class="form-label">Tipe Kriteria</label>
+                            <select class="form-select @error('tipe_kriteria') is-invalid @enderror" id="tipe_kriteria" wire:model="tipe_kriteria">
+                                <option value="">Pilih Tipe Kriteria</option>
+                                <option value="benefit">Benefit</option>
+                                <option value="cost">Cost</option>
+                            </select>
+                            @error('tipe_kriteria') <span class="text-danger">{{ $message }}</span> @enderror
                         </div>
                         <div class="mb-3">
                             <label for="deskripsi_kriteria" class="form-label">Deskripsi Kriteria</label>
