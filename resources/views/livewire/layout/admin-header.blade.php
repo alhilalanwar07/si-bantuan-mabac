@@ -18,7 +18,7 @@ new class extends Component {
         <div class="container-fluid">
             <nav class="navbar navbar-header-left navbar-expand-lg navbar-form nav-search p-0 d-none d-lg-flex">
                 <h4 class="">
-                    Sistem Informasi Bantuan Desa Ranoteta
+                    Sistem Pendukung Keputusan Bantuan Desa Ranoteta
                 </h4>
             </nav>
 
