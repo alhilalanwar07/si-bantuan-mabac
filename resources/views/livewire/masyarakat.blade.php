@@ -26,7 +26,7 @@ new class extends Component {
     public function with(): array
     {
         return [
-            'alternatifs' => Alternatif::paginate($this->paginate),
+            'alternatifs' => Alternatif::orderBy('created_at', 'desc')->paginate($this->paginate),
             'kriterias' => \App\Models\Kriteria::with('subkriteria')->get(),
         ];
     }
