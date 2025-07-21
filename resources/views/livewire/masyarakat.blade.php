@@ -2,6 +2,7 @@
 
 use Livewire\Volt\Component;
 use App\Models\Alternatif;
+use App\Models\Hasil;
 use App\Models\Kriteriaalternatif;
 use Illuminate\Support\Facades\DB;
 use Livewire\WithPagination;
@@ -105,12 +106,11 @@ new class extends Component {
     {
         // tidak bisa di delete jika ada relasi dengan tabel hasil atau kriteriaalternatif
         $alternatif = Alternatif::find($id);
-        if ($alternatif->hasil()->exists() || $alternatif->subkriteria()->exists()) {
-            $this->dispatch('errorAlertToast', 'Data tidak bisa dihapus karena memiliki relasi dengan data lain');
-            return;
-        }
-
+        // hapus alternatif jika tidak ada relasi di tabel hasil atau kriteriaalternatif, hasil
+        
         try {
+            Kriteriaalternatif::where('alternatif_id', $id)->delete();
+            Hasil::where('alternatif_id', $id)->delete();
             $alternatif->delete();
             $this->dispatch('deleteAlertToast');
         } catch (\Exception $e) {
