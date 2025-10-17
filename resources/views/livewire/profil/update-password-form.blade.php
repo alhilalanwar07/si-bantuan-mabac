@@ -25,6 +25,9 @@ new class extends Component
         } catch (ValidationException $e) {
             $this->reset('current_password', 'password', 'password_confirmation');
 
+            // alert error password update
+            $this->dispatch('password-update-failed');
+
             throw $e;
         }
 

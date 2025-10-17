@@ -162,6 +162,25 @@
                     setTimeout(function() { window.location.href = "/"; }, 500);
                 });
             });
+
+            Livewire.on('password-update-failed', (event) => {
+                swal({
+                    title: "Error"
+                    , text: "Gagal memperbarui password. Silakan coba lagi."
+                    , icon: "error"
+                    , buttons: {
+                        confirm: {
+                            text: "Ok"
+                            , value: true
+                            , visible: true
+                            , className: "btn btn-danger"
+                            , closeModal: true
+                        }
+                    }
+                    , timer: 2000
+                    , timerProgressBar: true
+                });
+            });
         });
 
     </script>
