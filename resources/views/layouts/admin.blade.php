@@ -18,6 +18,8 @@
     <link rel="stylesheet" href="{{ url('/') }}/assets/css/plugins.min.css" />
     <link rel="stylesheet" href="{{ url('/') }}/assets/css/kaiadmin.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link type="text/css" href="{{ url('/') }}/vendor/notyf/notyf.min.css" rel="stylesheet">
+    <link type="text/css" href="{{ url('/') }}/css/volt.css" rel="stylesheet">
     @livewireStyles
 </head>
 <body>
