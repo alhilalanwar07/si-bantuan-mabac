@@ -104,7 +104,7 @@
                 });
             });
 
-            Livewire.on('saved', (event) => {
+            Livewire.on('profile-updated', (event) => {
                 swal({
                     title: "Berhasil"
                     , text: "Profil berhasil diperbarui"
