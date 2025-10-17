@@ -63,7 +63,10 @@ new class extends Component
         </form>
     </x-modal>
 
-    @push('script')
+    <livewire:_alert />
+</section>
+
+@push('script')
     <script>
         // Initialize Bootstrap modals
         document.addEventListener('livewire:initialized', () => {
@@ -72,5 +75,4 @@ new class extends Component
         });
 
     </script>
-    @endpush
-</section>
+@endpush

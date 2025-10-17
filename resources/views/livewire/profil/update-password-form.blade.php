@@ -76,4 +76,6 @@ new class extends Component
             </x-action-message>
         </div>
     </form>
+
+    <livewire:_alert />
 </section>

@@ -103,6 +103,65 @@
                     , timerProgressBar: true
                 });
             });
+
+            Livewire.on('saved', (event) => {
+                swal({
+                    title: "Berhasil"
+                    , text: "Profil berhasil diperbarui"
+                    , icon: "success"
+                    , buttons: {
+                        confirm: {
+                            text: "Ok"
+                            , value: true
+                            , visible: true
+                            , className: "btn btn-success"
+                            , closeModal: true
+                        }
+                    }
+                    , timer: 1500
+                    , timerProgressBar: true
+                });
+            });
+
+            Livewire.on('password-updated', (event) => {
+                swal({
+                    title: "Berhasil"
+                    , text: "Password berhasil diperbarui"
+                    , icon: "success"
+                    , buttons: {
+                        confirm: {
+                            text: "Ok"
+                            , value: true
+                            , visible: true
+                            , className: "btn btn-success"
+                            , closeModal: true
+                        }
+                    }
+                    , timer: 1500
+                    , timerProgressBar: true
+                });
+            });
+
+            Livewire.on('user-deleted', (event) => {
+                swal({
+                    title: "Berhasil"
+                    , text: "Akun berhasil dihapus"
+                    , icon: "success"
+                    , buttons: {
+                        confirm: {
+                            text: "Ok"
+                            , value: true
+                            , visible: true
+                            , className: "btn btn-success"
+                            , closeModal: true
+                        }
+                    }
+                    , timer: 2000
+                    , timerProgressBar: true
+                }).then(() => {
+                    setTimeout(function() { window.location.href = "/"; }, 500);
+                });
+            });
         });
 
     </script>
